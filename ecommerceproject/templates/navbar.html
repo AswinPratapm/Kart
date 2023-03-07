@@ -1,0 +1,59 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+  <a class="navbar-brand" href="#"><i class="fa-solid fa-earth-asia"></i> Kart.in</a>
+<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+        <a class="nav-link" href="{% url 'shop:allproductcat' %}">
+
+
+<i class="fa-solid fa-house"></i><span class="sr-only"></span></a>
+      </li>
+      {% for cat in links %}
+      <li> <a class="nav-link" href="{{cat.get_url}}">{{cat.name}}</a> </li>
+      {% endfor %}
+
+      <li class="nav-item dropdown {% if 'shop' in request.path %} active {% endif %}">
+        <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Items
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="{% url 'shop:allproductcat' %}">All Products</a>
+
+          {% for cat in links %}
+          <a class="dropdown-item" href="{{cat.get_url}}">{{cat.name}}</a>
+
+          {% endfor %}
+
+        </div>
+      </li>
+<!--      <li class="nav-item">-->
+<!--        <a class="nav-link disabled" href="#">Disabled</a>-->
+<!--      </li>-->
+    </ul>
+    <!--    <form class="form-inline ml-2 my-lg-0" style="text-align: center;">-->
+
+    <form class="d-flex" action="{% url 'searchapp:searchresult' %}" method="GET">
+
+      <input class="form-control me-2" type="search" placeholder="Search" name="q" id="q" aria-label="Search">
+      <button class="btn btn-outline-success" type="submit"> <i class="fa-brands fa-searchengin"></i> </button>
+    </form>
+    <br><br>
+<div class="col-1"></div>
+    <div>
+    <ul class="navbar-nav">
+        {% if item_count > 0 %}
+    <li class="nav-item">
+     <center> <a class="btn btn-secondary" href="{% url 'cart:cart_detail' %}"><i class="fa-solid fa-cart-shopping"></i>({{item_count}})</a></center>
+
+    </li>
+        {% endif %}
+    </ul>
+    </div>
+  </div>
+  </div>
+</nav>
